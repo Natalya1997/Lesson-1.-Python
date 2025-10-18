@@ -3,8 +3,8 @@ class User:
         self.first_name = first_name
         self.last_name = last_name
     def name(self):
-        return self.first_name
+        print(self.first_name)
     def suname(self):
-        return self.last_name
+        print(self.last_name)
     def name_and_suname(self):
-        return f'{self.first_name} {self.last_name}'
+        print(f'{self.first_name} {self.last_name}')
