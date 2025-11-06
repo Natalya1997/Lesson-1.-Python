@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 
 
 driver = webdriver.Firefox()
@@ -9,8 +8,7 @@ driver.get("http://the-internet.herokuapp.com/inputs")
 
 field = driver.find_element(By.CSS_SELECTOR, "input")
 field.send_keys("Sky")
-field = driver.find_element(By.CSS_SELECTOR, "input").clear()
-field = driver.find_element(By.CSS_SELECTOR, "input")
+field.clear()
 field.send_keys("Pro")
 
 driver.quit()
