@@ -7,16 +7,25 @@ class OrderPage():
         self._driver = driver
     
     def fill_form(self):
-        self._driver.find_element(By.CSS_SELECTOR, "#first-name").send_keys("Natalya")
-        self._driver.find_element(By.CSS_SELECTOR, "#last-name").send_keys("Simonova")
-        self._driver.find_element(By.CSS_SELECTOR, "#postal-code").send_keys("220037")
+        first_name = WebDriverWait(self._driver, 20).until(
+        EC.visibility_of_element_located(By.CSS_SELECTOR, "#first-name"))
+        first_name.send_keys("Natalya")                                 
+        last_name = WebDriverWait(self._driver, 20).until(
+        EC.visibility_of_element_located(By.CSS_SELECTOR, "#last-name"))
+        last_name.send_keys("Simonova")
+        post_code = WebDriverWait(self._driver, 20).until(
+        EC.visibility_of_element_located(By.CSS_SELECTOR, "#postal-code"))
+        post_code.send_keys("220037")
                 
     def submit_form(self):
-        self._driver.find_element(By.CSS_SELECTOR, "#continue").click()
+        submit_form = WebDriverWait(self._driver, 10).until(
+        EC.element_to_be_clickable(By.CSS_SELECTOR, "#continue"))
+        submit_form.click()
    
     def get_total_price(self):
-         total_price = self._driver.find_element(By.CSS_SELECTOR, "div.summary_total_label").text
-         assert total_price == "Total: $58.29"
+         total_price = self._driver.find_element(
+             By.CSS_SELECTOR, "div.summary_total_label").text
+         return total_price 
    
    
     

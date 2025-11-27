@@ -22,7 +22,8 @@ def test_shop():
     order_page = OrderPage(browser)
     order_page.fill_form()
     order_page.submit_form()
-    order_page.get_total_price()
+    price = order_page.get_total_price()
+    assert price == "Total: $58.29"
     
     browser.quit()
 

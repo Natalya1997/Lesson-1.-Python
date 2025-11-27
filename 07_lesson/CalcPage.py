@@ -27,6 +27,7 @@ class CalcPage():
         WebDriverWait(self._driver, 45).until(
         EC.text_to_be_present_in_element((By.CLASS_NAME, "screen"), "15"))               
 
-        self.result = self._driver.find_element(By.CLASS_NAME, "screen").text                      
-        assert self.result == "15", f"Ожидался результат 15, получено: {self.result}"                  
+        result = self._driver.find_element(By.CLASS_NAME, "screen").text   
+        return result                   
+                          
 
