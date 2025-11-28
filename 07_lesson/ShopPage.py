@@ -14,5 +14,5 @@ class ShopPage():
         
     def get_to_cart(self):
         cart_link = WebDriverWait(self._driver, 10).until(
-        EC.element_to_be_clickable(By.CSS_SELECTOR, "a.shopping_cart_link"))
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "a.shopping_cart_link")))
         cart_link.click()

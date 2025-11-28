@@ -8,18 +8,18 @@ class OrderPage():
     
     def fill_form(self):
         first_name = WebDriverWait(self._driver, 20).until(
-        EC.visibility_of_element_located(By.CSS_SELECTOR, "#first-name"))
+        EC.visibility_of_element_located((By.CSS_SELECTOR, "#first-name")))
         first_name.send_keys("Natalya")                                 
         last_name = WebDriverWait(self._driver, 20).until(
-        EC.visibility_of_element_located(By.CSS_SELECTOR, "#last-name"))
+        EC.visibility_of_element_located((By.CSS_SELECTOR, "#last-name")))
         last_name.send_keys("Simonova")
         post_code = WebDriverWait(self._driver, 20).until(
-        EC.visibility_of_element_located(By.CSS_SELECTOR, "#postal-code"))
+        EC.visibility_of_element_located((By.CSS_SELECTOR, "#postal-code")))
         post_code.send_keys("220037")
                 
     def submit_form(self):
         submit_form = WebDriverWait(self._driver, 10).until(
-        EC.element_to_be_clickable(By.CSS_SELECTOR, "#continue"))
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "#continue")))
         submit_form.click()
    
     def get_total_price(self):

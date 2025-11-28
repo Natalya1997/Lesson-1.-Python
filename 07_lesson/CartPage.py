@@ -8,6 +8,6 @@ class CartPage():
       
     def checkout_button(self):
         checkout_button = WebDriverWait(self._driver, 10).until(
-        EC.element_to_be_clickable(By.CSS_SELECTOR, "#checkout"))
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "#checkout")))
         checkout_button.click()
         
