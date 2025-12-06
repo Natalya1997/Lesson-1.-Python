@@ -1,42 +1,50 @@
 from ProjectApi import ProjectApi
 import pytest
 
-api = ProjectApi("https://ru.yougile.com/api-v2")
+@pytest.fixture
+def project_api():
+    return ProjectApi()
 
-def test_create_project():
-    api.get_company_id()
-    api.get_token()
-    project_ID = api.create_project()
-    assert project_ID
+def test_create_project(project_api):
+        resp = project_api.create_project()
+        print(f"Статус созданного проекта: {resp.status_code}")
+        print(f"Текст проекта: {resp.text}")
+        assert resp.status_code == 201
+        project = resp.json()
+        assert 'id' in project
+        assert project['id'] is not None
 
-def test_create_project_negative():
-    api.get_company_id()
-    api.get_token()
-    neg_project_ID = api.create_project_negative()
-    assert neg_project_ID
-    
-def test_update_project():
-    api.get_company_id()
-    api.get_token()
-    new_project_ID = api.update_project()
-    assert new_project_ID
-    
-def test_update_project_negative():
-    api.get_company_id()
-    api.get_token()
-    project_ID_neg = api.update_project_negative()
-    assert project_ID_neg
-    
-def test_get_by_ID():
-    api.get_company_id()
-    api.get_token()
-    project = api.get_project_by_ID()
-    
-    assert project['title'] == 'УслугиГОСсектора'
-    assert project['deleted'] is False
-    
-def test_get_by_ID_negative():
-    api.get_company_id()
-    api.get_token()
-    project_neg = api.get_project_by_ID_negative()
-    assert project_neg.status_code == 400
+def test_create_project_negative(project_api):
+        resp = project_api.create_project(title = None)
+        print(f"Статус созданного проекта: {resp.status_code}")
+        assert resp.status_code == 400
+        
+def test_update_project(project_api):
+        project_api.create_project()
+        resp = project_api.update_project()
+        print(f"Статус созданного проекта: {resp.status_code}")
+        print(f"Текст проекта: {resp.text}")
+        assert resp.status_code == 200
+        new_id = resp.json()
+        assert 'id' in new_id
+        assert new_id['id'] is not None
+        
+def test_update_project_negative(project_api):
+        resp = project_api.update_project()
+        print(f"Статус созданного проекта: {resp.status_code}")
+        assert resp.status_code == 404
+        
+def test_get_by_ID(project_api):
+        project_api.create_project()
+        resp = project_api.get_project_by_ID()
+        print(f"Статус запроса: {resp.status_code}")
+        print(f"Текст запроса: {resp.text}")
+        assert resp.status_code == 200
+        project = resp.json()
+        assert project['title'] == 'ГосУслуги'
+        
+def test_get_by_ID_negative(project_api):
+        resp = project_api.get_project_by_ID()
+        print(f"Статус запроса: {resp.status_code}")
+        assert resp.status_code == 404
+        
