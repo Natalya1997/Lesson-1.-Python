@@ -15,11 +15,12 @@ def test_select():
 
 def test_select_1row_with_two_filters():
     connection = db.connect()
-    sql = text("SELECT FROM student WHERE \"level\" = :level AND \"education_form\" = :education_form")
+    sql = text("SELECT * FROM student WHERE \"level\" = :level AND \"education_form\" = :education_form")
     result = connection.execute(sql, {"level": "Advanced", "education_form": "personal"})
     rows = result.mappings().all()
     
     assert len(rows) == 4
+    
     
 def test_add_new():
     connection = db.connect()
